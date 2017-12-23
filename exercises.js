@@ -5,9 +5,27 @@
  * @param {Object}
  * @return {Array}
  */
+//////////////////////////////////////////
 
-var getAllUsernames;
 
+function getAllUsernames(obj){
+  //create new array to push data to
+  var newArray = [];
+  //create a shortcut to the id key
+  var id = obj.data.id;
+  //put keys of id into an array
+  var keys = Object.keys(obj.data.id);
+  //make a loop to loop as many times as the amount of keys in the users.data.id
+  for(var i = 0; i < Object.keys(id).length; i++) {
+  //push value of username into newArray
+    newArray.push(id[keys[i]].username);
+  }
+  //return newArray
+  return newArray;
+};
+
+
+///////////////////////////////////////////
 /* #hometownCity
  *
  * Takes in an array and returns a string of the users hometown city.
@@ -15,9 +33,15 @@ var getAllUsernames;
  * @param {Array}
  * @return {String}
  */
+/////////////////////////////////////////////
 
-var hometownCity;
 
+function hometownCity(arg){
+ return arg[0].hometown.state.montana.city;
+};
+
+
+//////////////////////////////////////////////
 /* #usersCurrentState
  *
  * Takes 2 arguments 'data' and 'usernames' and returns a new object with the username as the key and the user's current state as the value.
@@ -26,9 +50,23 @@ var hometownCity;
  * @param {Array}
  * @return {Object}
  */
+///////////////////////////////////////////////
 
-var usersCurrentState;
 
+function usersCurrentState(data, usernames){
+  //create empty object
+  var obj = {};
+  //loop through data array with usernames looping in parallel
+  for(var i = 0; i < data.length; i++){
+  //assign currentLocation.state to each username in parallel
+    obj[usernames[i]] = data[i][1].currentLocation.state;
+  };  
+  //return the object
+  return obj;
+};
+
+
+///////////////////////////////////////////////
 /* #findAdmin
  *
  * Takes in an object and returns the username of the admin.
@@ -36,9 +74,26 @@ var usersCurrentState;
  * @param {Object}
  * @return {String}
  */
+/////////////////////////////////////////////////
 
-var findAdmin;
 
+function findAdmin(user){
+  //create shortcut to id level
+    var idLvl = user.data.id;
+  //find all keys in idLvl
+    var objKeys = Object.keys(idLvl);
+  //loop through objKeys
+    for(var i = 0; i < objKeys.length; i++){
+  //look for any admin that equals true
+        if(idLvl[objKeys[i]].admin){
+  //return the username if it is true
+          return idLvl[objKeys[i]].username;
+        }
+    }
+};
+
+
+////////////////////////////////////////////////////
 /* #addNewMovie
  *
  * Takes in 3 arguments 'data', 'id', 'newMovie'. Returns an array of movie titles.
@@ -48,8 +103,17 @@ var findAdmin;
  * @param {String} movie to add to array
  * @return {Array}
  */
+////////////////////////////////////////////////////
 
-var addNewMovie;
+
+function addNewMovie(user, x, newMovie){
+  //gets the movies array of the user with id of x
+  var movies = user.data.id[x].favoriteMovies;
+  //adds the new movie to the last index in the array
+  movies.push(newMovie);
+  //returns the movies array
+  return movies; 
+};
 
 /* #favoriteBooks
  *
@@ -59,7 +123,25 @@ var addNewMovie;
  * @return {Array}
  */
 
-var favoriteBooks;
+function favoriteBooks(obj){
+  //create empty object to write to
+  var newObj = {};
+  //create shortcut to id level
+  var idLvl = obj.data.id;
+  //loop through the ID level using for loop because we are going to be looking at 2 different paths in the object
+  for(var i = 1; i <= Object.keys(idLvl).length; i++) {
+  //assign author to author variable
+    let author = idLvl[i].favoriteBook.author;
+  //assign title to title variable
+    let title = idLvl[i].favoriteBook.title;
+  //add new key and value with author being key and title being value
+    newObj[author] = title;
+  }
+  //enclose object in an array
+  var newArray = [newObj];
+  //return the array
+  return newArray;
+};
 
 /* #countTracks
  *
@@ -69,7 +151,10 @@ var favoriteBooks;
  * @return {Number}
  */
 
-var countTracks;
+function countTracks(obj){
+  //return the amount of tracks in devLeague
+  return Object.keys(obj.devLeague.tracks).length;
+};
 
 /* #fullTimeStatus
  *
@@ -80,7 +165,12 @@ var countTracks;
  * @return {Object}
  */
 
-var fullTimeStatus;
+function fullTimeStatus(data, trackName){
+  //changes fullTime.offered to true
+  data[trackName][0].fullTime.offered = true;
+  //returns the object fullTime
+  return data[trackName][0].fullTime;
+};
 
 /* #newTrack
  *
@@ -92,7 +182,12 @@ var fullTimeStatus;
  * @return {Object}
  */
 
-var newTrack;
+function newTrack(data, array, string){
+  //adds key & value to data object with key being new track and value being the info of part time and full time
+  data[string] = array[0];
+  //returns data object
+  return data;
+};
 
 /* #bigDataTrack
  *
@@ -103,7 +198,9 @@ var newTrack;
  * @return {Object }
  */
 
-var bigDataTrack;
+function bigDataTrack(data, trackName){
+  console.log(data);
+};
 
 /* #incrementAge
  *
@@ -440,44 +537,44 @@ var getPrices;
 var addName;
 
 module.exports = {
-  getAllUsernames: null,
-  hometownCity: null,
-  usersCurrentState: null,
-  findAdmin: null,
-  addNewMovie: null,
-  favoriteBooks: null,
-  countTracks: null,
-  newTrack: null,
-  fullTimeStatus: null,
-  bigDataTrack: null,
-  incrementAge: null,
-  movieRatings: null,
-  sumOfAllStudents: null,
-  mapLanguageToCreator: null,
-  mapOccurrences: null,
-  countLanguages: null,
-  phoneNumber: null,
-  reverseStrings: null,
-  getAgeById: null,
-  allTheStates: null,
-  allTheMovies: null,
-  addCoffeeFlavor: null,
-  avgCoffeePrice: null,
-  updateBakedGoodsPrice: null,
-  costOfCoffeeOnOrder: null,
-  uniqueCoffeeFlavors: null,
-  cheapestSandwich: null,
-  allcafeItems: null,
-  halfOffSandwiches: null,
-  getNoMeatSandwiches: null,
-  updateCoffeeInventory: null,
-  findCoffee: null,
-  totalPopulation: null,
-  placesLived: null,
-  addSchool: null,
-  updateGitHubRank: null,
-  top3rankedLang: null,
-  removeIngredient: null,
-  getPrices: null,
-  addName: null
+  getAllUsernames: getAllUsernames,
+  hometownCity: hometownCity,
+  usersCurrentState: usersCurrentState,
+  findAdmin: findAdmin,
+  addNewMovie: addNewMovie,
+  favoriteBooks: favoriteBooks,
+  countTracks: countTracks,
+  newTrack: newTrack,
+  fullTimeStatus: fullTimeStatus,
+  bigDataTrack: bigDataTrack,
+  incrementAge: incrementAge,
+  movieRatings: movieRatings,
+  sumOfAllStudents: sumOfAllStudents,
+  mapLanguageToCreator: mapLanguageToCreator,
+  mapOccurrences: mapOccurrences,
+  countLanguages: countLanguages,
+  phoneNumber: phoneNumber,
+  reverseStrings: reverseStrings,
+  getAgeById: getAgeById,
+  allTheStates: allTheStates,
+  allTheMovies: allTheMovies,
+  addCoffeeFlavor: addCoffeeFlavor,
+  avgCoffeePrice: avgCoffeePrice,
+  updateBakedGoodsPrice: updateBakedGoodsPrice,
+  costOfCoffeeOnOrder: costOfCoffeeOnOrder,
+  uniqueCoffeeFlavors: uniqueCoffeeFlavors,
+  cheapestSandwich: cheapestSandwich,
+  allcafeItems: allcafeItems,
+  halfOffSandwiches: halfOffSandwiches,
+  getNoMeatSandwiches: getNoMeatSandwiches,
+  updateCoffeeInventory: updateCoffeeInventory,
+  findCoffee: findCoffee,
+  totalPopulation: totalPopulation,
+  placesLived: placesLived,
+  addSchool: addSchool,
+  updateGitHubRank: updateGitHubRank,
+  top3rankedLang: top3rankedLang,
+  removeIngredient: removeIngredient,
+  getPrices: getPrices,
+  addName: addName
 };
