@@ -115,6 +115,8 @@ function addNewMovie(user, x, newMovie){
   return movies; 
 };
 
+
+///////////////////////////////////////////////////////////////////
 /* #favoriteBooks
  *
  * Takes in an object and returns an array containing an object with the users favorite books with the author as the key and the title as the value.
@@ -122,6 +124,8 @@ function addNewMovie(user, x, newMovie){
  * @param {Object}
  * @return {Array}
  */
+////////////////////////////////////////////////////////////////////
+
 
 function favoriteBooks(obj){
   //create empty object to write to
@@ -143,6 +147,8 @@ function favoriteBooks(obj){
   return newArray;
 };
 
+
+/////////////////////////////////////////////////////////////////////
 /* #countTracks
  *
  * Takes in an object and returns the number amount of tracks offered.
@@ -150,6 +156,8 @@ function favoriteBooks(obj){
  * @param {Object}
  * @return {Number}
  */
+////////////////////////////////////////////////////////////////////////
+
 
 function countTracks(obj){
   //return the amount of tracks in devLeague
@@ -164,6 +172,8 @@ function countTracks(obj){
  * @param {String}
  * @return {Object}
  */
+//////////////////////////////////////////////////////////////////////////////////
+
 
 function fullTimeStatus(data, trackName){
   //changes fullTime.offered to true
@@ -172,6 +182,8 @@ function fullTimeStatus(data, trackName){
   return data[trackName][0].fullTime;
 };
 
+
+//////////////////////////////////////////////////////////////////////////
 /* #newTrack
  *
  * Takes in 3 arguments 'data', 'array', and 'string'. Returns an object with a new track with the 'string' as the key and the 'array' as the value.
@@ -181,6 +193,8 @@ function fullTimeStatus(data, trackName){
  * @param {String}
  * @return {Object}
  */
+/////////////////////////////////////////////////////////////////////////////////
+
 
 function newTrack(data, array, string){
   //adds key & value to data object with key being new track and value being the info of part time and full time
@@ -189,23 +203,35 @@ function newTrack(data, array, string){
   return data;
 };
 
+
+////////////////////////////////////////////////////////////////////////////
 /* #bigDataTrack
  *
- * Takes in 2 arguments 'data' and 'trackName' and changes the selected track full time status to true and doubles the amount of current students attending.
+ * Takes in 2 arguments 'data' and 'trackName' and changes the selected track full time status to true and changes currentStudents to 10.
  *
  * @param {Object}
  * @param {String}
  * @return {Object }
  */
+///////////////////////////////////////////////////////////////////////////
 
 function bigDataTrack(data, trackName){
   //NOTE: data === schools.devLeague; trackName === bigData
-  console.log(trackName);
-
+  //shortcut to trackName[0].fullTime
+  var shortFT = data.tracks[trackName][0].fullTime;
+  //changes currentStudents to 10
+  shortFT.currentStudents = 10;
+  //changes value of offered to true
+  shortFT.offered = true;
+  //revalues trackName and places it into an object
+  var temp = {};
+  temp[trackName] = shortFT;
   //return {Object(bigData)}
-  
+  return temp;
 };
 
+
+/////////////////////////////////////////////////////////////////////////
 /* #incrementAge
  *
  * Takes in 2 arguments 'value' and 'key' and returns key-value pairs in an object.
