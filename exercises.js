@@ -462,7 +462,9 @@ function reverseStrings(obj){
 /////////////////////////////////////////////////////////////////////////
 
 
-var getAgeById;
+function getAgeById(obj, num){
+  return [obj.data.id[num].username, obj.data.id[num].age]
+};
 
 /* #allTheStates
  *
@@ -471,9 +473,30 @@ var getAgeById;
  * @param {Object}
  * @return {Array}
  */
+//////////////////////////////////////////////////////////////////////////////
 
-var allTheStates;
 
+function allTheStates(obj){
+  //create empty array
+  var arr = [];
+  //loop through object array
+  for(var a = 0; a < obj.length; a++){
+  //loop through citiesLived array
+    for(var b = 0; b < obj[a].citiesLived.length; b++){
+  //make a variable for 'hometown' & currentLocation key
+      var place = Object.keys(obj[a].citiesLived[b])[0];
+  //make a variable for state key
+      var state = Object.keys(obj[a].citiesLived[b][place].state);
+  //take the state out of the array and push it into the arr
+      arr.push(state[0]);
+    }
+  }
+  //return arr
+  return arr;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
 /* #allTheMovies
  *
  * Takes in an object and returns an array of strings with all the names of each user's favorite movies.
@@ -481,6 +504,8 @@ var allTheStates;
  * @param {Object}
  * @return {Array}
  */
+////////////////////////////////////////////////////////////////////////////
+
 
 var allTheMovies;
 
