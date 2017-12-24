@@ -390,9 +390,16 @@ function mapOccurrences(lang){
  * @param {Object}
  * @return {Number}
  */
+///////////////////////////////////////////////////////////////////
 
-var countLanguages;
 
+function countLanguages(obj){
+  //Get the keys in obj and return the number of keys
+  return Object.keys(obj).length;
+};
+
+
+///////////////////////////////////////////////////////////////////////
 /* #phoneNumber
  *
  * Takes in a string and returns only the numbers in an array.
@@ -400,9 +407,25 @@ var countLanguages;
  * @param {String} phone number
  * @return {Array}
  */
+////////////////////////////////////////////////////////////////////////
 
-var phoneNumber;
 
+function phoneNumber(str){
+  //create empty array to push to
+  var arr = []; 
+  //take out all non number characters
+  var num = str.replace(/[^0-9]/g,"");
+  //loop through each digit in num
+  for(var i = 0; i < num.length; i++) {
+  //push each letter into the array and change it into a number
+    arr.push(+num.charAt(i));
+  }
+  //return arr
+  return arr;
+};
+
+
+/////////////////////////////////////////////////////////////////////////
 /* #phoneNumber
  *
  * Takes in an object and returns the names of the tracks offered reversed.
@@ -410,9 +433,25 @@ var phoneNumber;
  * @param {Object}
  * @return {Array}
  */
+////////////////////////////////////////////////////////////////////////
 
-var reverseStrings;
 
+function reverseStrings(obj){
+  //makes empty array
+  var arr = [];
+  //makes tracks into an array
+  var tracks = Object.keys(obj.devLeague.tracks);
+  //loops throuhg tracks
+  tracks.forEach(element => {
+  //rearranges the letters in track in reverse order and pushes it to the arr
+    arr.push(element.split("").reverse().join(""));
+  })
+  //returns arr
+  return arr;
+};
+
+
+/////////////////////////////////////////////////////////////////////////
 /* #getAgeById
  *
  * Takes in an object and returns an array with the user's username and age.
@@ -420,6 +459,8 @@ var reverseStrings;
  * @param {Object}
  * @return {Array}
  */
+/////////////////////////////////////////////////////////////////////////
+
 
 var getAgeById;
 
