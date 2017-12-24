@@ -507,8 +507,22 @@ function allTheStates(obj){
 ////////////////////////////////////////////////////////////////////////////
 
 
-var allTheMovies;
+function allTheMovies(obj){
+  //NOTE: schema to get to favoriteMovies
+  //       obj[#].favoriteMovies         <= this outputs an array of favorite movies
+  //create an empty array
+  var arr = [];
+  //loop through obj
+  obj.forEach(element => {
+  //concat to arr the favoriteMovies array
+    arr = arr.concat(element.favoriteMovies);
+  })
+  //return arr
+  return arr;
+};
 
+
+///////////////////////////////////////////////////////////////////////////////////
 /* #addCoffeeFlavor
  *
  * Takes in an object and returns a new object with the name of the coffee as the key and the value as an array of flavors plus a new flavor added to each array.
