@@ -267,6 +267,8 @@ function incrementAge(value, key){
  * @param {Array}
  * @return {Object}
  */
+///////////////////////////////////////////////////////////////////
+
 
 function movieRatings(key, value){
   /*NOTE: key === 
@@ -290,6 +292,8 @@ function movieRatings(key, value){
   return obj;
 };
 
+
+//////////////////////////////////////////////////////////////////
 /* #sumOfAllStudents
  *
  * Takes in an object and returns the sum of all currently enrolled students.
@@ -314,6 +318,8 @@ function sumOfAllStudents(obj){
   },-5)
 };
 
+
+/////////////////////////////////////////////////////////////////////
 /* #mapLanguageToCreator
  *
  * Takes in 3 arguments 'data', 'createdBy', and 'year' and returns key-value pairs { name: language }.
@@ -323,9 +329,31 @@ function sumOfAllStudents(obj){
  * @param {Number} year
  * @return {Object}
  */
+//////////////////////////////////////////////////////////////////
 
-var mapLanguageToCreator;
 
+function mapLanguageToCreator(data, creator, year){
+  //NOTE: data === languages; createdBy === ['Brendan Eich', 'James Gosling' ]; year === 1995;
+  //create an empty object
+  var obj = {};
+  //get keys of data object
+  var dataKeys = Object.keys(data);
+  //loop through dataKeys array using for loop so that I can input name 
+  for(var i = 0; i < dataKeys.length; i++){
+  //create shortcut to creator index
+    let creatorIndex = creator.indexOf(data[dataKeys[i]].createdBy);
+  //see if the index exists
+    if (creatorIndex !== -1) {
+  //input key value pair into obj
+      obj[creator[creatorIndex]] = dataKeys[i];
+    }
+  }
+  //return { "Brendan Eich": "javascript", "James Gosling": "java"}
+  return obj;
+};
+
+
+//////////////////////////////////////////////////////////////////
 /* #mapOccurrences
  *
  * Takes in an object and returns key-value pairs that count how many languages were created in given years { 2017: 1 }.
@@ -333,8 +361,12 @@ var mapLanguageToCreator;
  * @param {Object} data
  * @return {Object}
  */
+//////////////////////////////////////////////////////////////////
 
-var mapOccurrences;
+
+function mapOccurrences(){
+
+};
 
 /* #countLanguages
  *
