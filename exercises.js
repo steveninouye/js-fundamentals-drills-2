@@ -364,10 +364,25 @@ function mapLanguageToCreator(data, creator, year){
 //////////////////////////////////////////////////////////////////
 
 
-function mapOccurrences(){
-
+function mapOccurrences(lang){
+  //NOTE: obj === languages;
+  var obj = {};
+  var langKeys = Object.keys(lang);
+  for(var i = 0; i < langKeys.length; i++){
+    //shortcut to year created
+    var yrCreated = lang[langKeys[i]].yearCreated;
+    if(obj[yrCreated] !== undefined) {
+      obj[yrCreated] += 1;
+    } else {
+      obj[yrCreated] = 1;
+    }    
+  }
+  //{ "1972": 1, "1989": 1,}
+  return obj;
 };
 
+
+///////////////////////////////////////////////////////////////////
 /* #countLanguages
  *
  * Takes in an object and returns the number of languages in the dataset.
