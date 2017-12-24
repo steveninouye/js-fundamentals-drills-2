@@ -215,6 +215,7 @@ function newTrack(data, array, string){
  */
 ///////////////////////////////////////////////////////////////////////////
 
+
 function bigDataTrack(data, trackName){
   //NOTE: data === schools.devLeague; trackName === bigData
   //shortcut to trackName[0].fullTime
@@ -224,10 +225,10 @@ function bigDataTrack(data, trackName){
   //changes value of offered to true
   shortFT.offered = true;
   //revalues trackName and places it into an object
-  var temp = {};
-  temp[trackName] = shortFT;
+  var obj = {};
+  obj[trackName] = shortFT;
   //return {Object(bigData)}
-  return temp;
+  return obj;
 };
 
 
@@ -240,9 +241,24 @@ function bigDataTrack(data, trackName){
  * @param {String}
  * @return {Object}
  */
+///////////////////////////////////////////////////////////////////////////
 
-var incrementAge;
 
+function incrementAge(value, key){
+  //NOTE: value === [32, 29, 40]; key === ['user1', 'user2', 'user3'];
+  //create empty object
+  var obj = {};
+  //loops through the value and key array in parallel
+  for(var i = 0; i < key.length; i++){
+  //sets key and value with value incrementing by 1 and adding on ' years old'
+    obj[key[i]] = (value[i] + 1) + " years old";
+  }
+  //return obj
+  return obj;
+};
+
+
+////////////////////////////////////////////////////////////////////
 /* #movieRatings
  *
  * Takes in 2 arguments 'key' and 'value' and returns key-value pairs in an object.
@@ -252,7 +268,27 @@ var incrementAge;
  * @return {Object}
  */
 
-var movieRatings;
+function movieRatings(key, value){
+  /*NOTE: key === 
+  [   [ 'Star Wars', 'The Empire Strikes Back', 'Return of the Jedi' ],
+      [ 'The Fellowship of the Ring',
+        'The Two Towers',
+        'The Return of the King',
+        'The Hobbit' ],
+      [ 'Ghostbusters', 'Napolean Dynamite' ] ]
+  value === [ 9.5, 8, 8.6, 9, 8.9, 9.4, 7.8, 8.3, 7.5 ] */
+  //create empty object
+  var obj = {};
+  //loop through the key array
+  key.forEach(element => {
+  //loop through each element of the key array in parallel with value array
+    for(var i = 0; i < element.length; i++){
+  //assign new key: value pair 
+      obj[element[i]] = value[i];
+    }
+  })
+  return obj;
+};
 
 /* #sumOfAllStudents
  *
@@ -260,9 +296,23 @@ var movieRatings;
  *
  * @param {Object}
  * @return {Number}
+ * ?????????????????????????????????????????????????????????????????
+ * how are the total students enrolled 42?
  */
+////////////////////////////////////////////////////////
 
-var sumOfAllStudents;
+
+
+function sumOfAllStudents(obj){
+  //NOTE: obj === schools.devLeague.tracks;
+  //create an array of keys(tracks)
+  var tracks = Object.keys(obj);
+  return tracks.reduce((acc, curr) => {
+    acc += obj[curr][0].fullTime.currentStudents;
+    acc += obj[curr][1].partTime.currentStudents;
+    return acc;
+  },-5)
+};
 
 /* #mapLanguageToCreator
  *
