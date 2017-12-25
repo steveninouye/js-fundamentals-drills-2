@@ -635,10 +635,8 @@ function uniqueCoffeeFlavors(arr){
   //in element is not in the array push it into the array
     if(acc.indexOf(curr) === -1) {
       acc.push(curr);
-      return acc;
-    } else {
-      return acc;
     }
+    return acc;
   }, []);
 };
 
@@ -715,10 +713,8 @@ function halfOffSandwiches(sandwiches, num){
     if (sandwiches[0][curr].pricePerItem > num) {
   //assign key value pair schema:      sandwichName:   price/2
       acc[curr] = sandwiches[0][curr].pricePerItem / 2;
-      return acc;
-    } else {
-      return acc;
-    }
+    } 
+    return acc;
   }, {});
 };
 
@@ -742,10 +738,8 @@ function getNoMeatSandwiches(sandwiches){
     if (Object.keys(sandwiches[0][curr].ingredients).indexOf('meat') === -1) {
   //if none then assign key as sandwichName and value as '$price'
       acc[curr] = "$" + sandwiches[0][curr].pricePerItem;
-      return acc;
-    } else {
-      return acc;
     }
+    return acc;
   }, {});
 };
 
@@ -797,9 +791,18 @@ function updateCoffeeInventory(obj, arr, num){
 
 
 function findCoffee(obj, num){
-
+  //NOTE: obj === cafe; num === 4
+  //schema: obj.coffeeType[coffeeName].pricePerCup.small
+  return Object.keys(obj.coffeeType).reduce((acc, curr) => {
+    if (obj.coffeeType[curr].pricePerCup.small < num) {
+      acc[curr] = true;
+    };
+    return acc;
+  }, {});
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////
 /* #totalPopulation
  *
  * Takes in an object and returns the total sum of the all the places every user has lived.
@@ -808,9 +811,23 @@ function findCoffee(obj, num){
  * @return {Number} sum of population
  * 
  */
+//////////////////////////////////////////////////////////////////////////////////////////
 
-var totalPopulation;
 
+function totalPopulation(obj){
+  //NOTE: obj === [ [citiesLived], [citiesLived], [citiesLived] ]
+  //schema: obj [id] [0 or 1] [hometown or currentLocation].state[________].population
+  var cache = 0;
+  obj.forEach(element => {
+    element.forEach(element2 => {
+      cache += Object.values(element2[Object.keys(element2)[0]].state)[0].population;
+    })
+  })
+  return cache;
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
 /* #placesLived
  *
  * Takes in an object and returns a new object with 2 properties 'hometown' and 'currentLocation' and set the value to an object with the user's username as the key and the state as the value.
@@ -823,9 +840,15 @@ var totalPopulation;
  * @return {Object} user object containing their username, state of hometown and state of currentLocation
  * 
  */
+/////////////////////////////////////////////////////////////////////////////////////
 
-var placesLived;
 
+function placesLived(){
+
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////
 /* #addSchool
  *
  * Takes in 3 arguments 'data', 'newSchool', and 'tracks'. Returns the 'data' object with the 'newSchool' object added. Set 'tracks' value to an array of tracks offered.
@@ -834,9 +857,15 @@ var placesLived;
  * @return {Number} sum of population
  * 
  */
+//////////////////////////////////////////////////////////////////////////////////////
 
-var addSchool;
 
+function addSchool(){
+
+};
+
+
+/////////////////////////////////////////////////////////////////////////////
 /* #updateGitHubRank
  *
  * Takes in an object and a number. Returns a new object with a gitHubRank property set to an object with the rank of each language in the data object.
@@ -845,8 +874,12 @@ var addSchool;
  * @return {Object}
  * 
  */
+//////////////////////////////////////////////////////////////////////
 
-var updateGitHubRank;
+
+function updateGitHubRank(){
+
+};
 
 /* #top3rankedLang
  *
@@ -856,8 +889,12 @@ var updateGitHubRank;
  * @return {Object}
  * 
  */
+/////////////////////////////////////////////////////////////////////////////
 
-var top3rankedLang;
+
+function top3rankedLang(){
+
+};
 
 /* #removeIngredient
  *
@@ -868,9 +905,15 @@ var top3rankedLang;
  * @return {Object}
  * 
  */
+/////////////////////////////////////////////////////////////////////////////////
 
-var removeIngredient;
 
+function removeIngredient(){
+
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////
 /* #removeIngredient
  *
  * Takes in an object and returns a new object with the key as the name of the item and the value set to the price.
@@ -879,9 +922,15 @@ var removeIngredient;
  * @return {Object}
  * 
  */
+///////////////////////////////////////////////////////////////////////////////////
 
-var getPrices;
 
+function getPrices(){
+
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////
 /* #addName
  *
  * Takes in an object and array. Returns the object with each user's full name where the first element in the array belonging to the first user, second element belonging to the second user, etc...
@@ -891,8 +940,12 @@ var getPrices;
  * @return {Object}
  * 
  */
+////////////////////////////////////////////////////////////////////////////////////////
 
-var addName;
+
+function addName(){
+
+};
 
 module.exports = {
   getAllUsernames: getAllUsernames,
