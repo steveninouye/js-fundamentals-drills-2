@@ -735,8 +735,18 @@ function halfOffSandwiches(sandwiches, num){
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
-function getNoMeatSandwiches(){
-
+function getNoMeatSandwiches(sandwiches){
+  //reduce keys in the object in the array
+  return Object.keys(sandwiches[0]).reduce((acc, curr) => {
+  //check to see if there is a 'meat' key in 'ingredients'
+    if (Object.keys(sandwiches[0][curr].ingredients).indexOf('meat') === -1) {
+  //if none then assign key as sandwichName and value as '$price'
+      acc[curr] = "$" + sandwiches[0][curr].pricePerItem;
+      return acc;
+    } else {
+      return acc;
+    }
+  }, {});
 };
 
 /* #updateCoffeeInventory
