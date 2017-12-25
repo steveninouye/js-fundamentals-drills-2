@@ -531,9 +531,23 @@ function allTheMovies(obj){
  * @param {String} flavor
  * @return {Object}
  */
+////////////////////////////////////////////////////////////////////
 
-var addCoffeeFlavor;
 
+function addCoffeeFlavor(coffeeType, newFlavor){
+  //curr === (keys of coffeeType);
+  return Object.keys(coffeeType).reduce((acc, curr) => {
+  //push newFlavor into flavors
+    coffeeType[curr].flavors.push(newFlavor);
+  //assign key value pair for object
+    acc[curr] = coffeeType[curr].flavors;
+  //return the accumulator
+    return acc;
+  }, {});
+};
+
+
+//////////////////////////////////////////////////////////////////
 /* #avgCoffeePrice
  *
  * Takes in 2 arguments 'data' and 'number'. Returns the average price of coffee based on total/number.
@@ -543,9 +557,20 @@ var addCoffeeFlavor;
  * @return {Number}
  * 
  */
+/////////////////////////////////////////////////////////////////////
 
-var avgCoffeePrice;
 
+function avgCoffeePrice(data, num){
+  //Round Up
+  //reduce using the keys of data
+  return Math.ceil(Object.keys(data).reduce((acc, curr) => {
+  //add all the elements of data[curr].pricePerPound divided by num
+    return acc + (data[curr].pricePerPound / num);
+  }, 0));
+};
+
+
+/////////////////////////////////////////////////////////////////////////
 /* #updateBakedGoodsPrice
  *
  * Takes in 2 arguments 'data' and 'discountedPrice' and returns the data object with the new discountedPrice of all bakedGoods.
@@ -555,9 +580,21 @@ var avgCoffeePrice;
  * @return {Number}
  * 
  */
+/////////////////////////////////////////////////////////////////////////
 
-var updateBakedGoodsPrice;
 
+function updateBakedGoodsPrice(data, discountedPrice){
+  //loop through the bakedGoods
+  Object.keys(data.bakedGoods).forEach(element => {
+  //assign new price for each baked good
+    data.bakedGoods[element].pricePerItem = discountedPrice;
+  })
+  //return bakedGoods object
+  return data.bakedGoods;
+};
+
+
+/////////////////////////////////////////////////////////////////////////////
 /* #costOfCoffeeOnOrder
  *
  * Takes in an object and returns the total cost of all coffee's on order.
@@ -566,9 +603,19 @@ var updateBakedGoodsPrice;
  * @return {Number}
  * 
  */
+/////////////////////////////////////////////////////////////////////////////
 
-var costOfCoffeeOnOrder;
 
+function costOfCoffeeOnOrder(obj){
+  //reduce obj keys
+  return Object.keys(obj).reduce((acc, curr) => {
+  //add (pricePerPound * ordered) with each value of previous loop
+    return acc + obj[curr].pricePerPound * obj[curr].ordered;
+  }, 0)
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
 /* #costOfCoffeeOnOrder
  *
  * Takes in an array and returns a new array with all the flavors of coffee displaying only once in the array.
@@ -577,9 +624,26 @@ var costOfCoffeeOnOrder;
  * @return {Array}
  * 
  */
+////////////////////////////////////////////////////////////////////////////////
 
-var uniqueCoffeeFlavors;
 
+function uniqueCoffeeFlavors(arr){
+  //combine all inner arrays
+  var allArrays = arr[0].concat(arr[1],arr[2]);
+  //reduce allArrays
+  return allArrays.reduce((acc, curr) => {
+  //in element is not in the array push it into the array
+    if(acc.indexOf(curr) === -1) {
+      acc.push(curr);
+      return acc;
+    } else {
+      return acc;
+    }
+  }, []);
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////
 /* #cheapestSandwich
  *
  * Takes in an object and returns a string with the price of the cheapest sandwich and the name of the sandwich. (eg. "$1 sandwichName")
@@ -588,9 +652,28 @@ var uniqueCoffeeFlavors;
  * @return {String}
  * 
  */
+////////////////////////////////////////////////////////////////////////////////////////
 
-var cheapestSandwich;
 
+function cheapestSandwich(obj){
+  //NOTE: obj Schema: obj.sandwiches[nameOfSandwich].pricePerItem
+  //assign default variables
+  var sandwichName = "";
+  var sandwichPrice = Infinity;
+  //loop through keys in obj.sandwiches
+  Object.keys(obj.sandwiches).forEach(element => {
+  //if price is less that previous price reassign sandwichName & sandwichPrice
+    if (obj.sandwiches[element].pricePerItem < sandwichPrice){
+      sandwichName = element;
+      sandwichPrice = obj.sandwiches[element].pricePerItem;
+    };
+  });
+  //return '$[sandwichPrice] [sandwichName]'
+  return `$${sandwichPrice} ${sandwichName}`;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 /* #allcafeItems
  *
  * Takes in an object and returns key value pairs where the key is the category product (coffee, baked goods, etc) and the value is an array of strings. (eg. { category: ['']})
@@ -599,6 +682,8 @@ var cheapestSandwich;
  * @return {String}
  * 
  */
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 var allcafeItems;
 
