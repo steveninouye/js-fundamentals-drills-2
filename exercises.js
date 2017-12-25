@@ -749,6 +749,8 @@ function getNoMeatSandwiches(sandwiches){
   }, {});
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////
 /* #updateCoffeeInventory
  *
  * Takes in an object, array, and number. Should return a new object with the property 'inStock' and 'ordered', set the value to an object with key as the coffee name and the value as the new amount.
@@ -759,9 +761,29 @@ function getNoMeatSandwiches(sandwiches){
  * @return {Object}
  * 
  */
+//////////////////////////////////////////////////////////////////////////////////////////
 
-var updateCoffeeInventory;
 
+function updateCoffeeInventory(obj, arr, num){
+  //create empty objects with nested objects
+  var cache = { inStock: { }, ordered: { } };
+  //reduce arr
+  return arr.reduce((acc, curr, indx) => {
+  //set new value to inStock
+      obj[indx].inStock -= Object.values(curr)[0];
+  //set new value to ordered
+      obj[indx].ordered += Object.values(curr)[0];
+  //write key value pair for object inStock
+      acc.inStock[Object.keys(curr)[0]] = obj[indx].inStock;
+  //write key value pair for object ordered
+      acc.ordered[Object.keys(curr)[0]] = obj[indx].ordered;
+  //return accumulator
+      return acc;
+  }, cache);
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
 /* #findCupOfCoffee
  *
  * Takes in an object and number. Returns a new object with the name of the coffee as the key and the value set to true if the cup of coffee cost less than or equal to number param.
@@ -771,8 +793,12 @@ var updateCoffeeInventory;
  * @return {Object}
  * 
  */
+/////////////////////////////////////////////////////////////////////////////////////////////
 
-var findCoffee;
+
+function findCoffee(obj, num){
+
+};
 
 /* #totalPopulation
  *
