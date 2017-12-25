@@ -685,8 +685,18 @@ function cheapestSandwich(obj){
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var allcafeItems;
+function allcafeItems(obj){
+  //reduce keys in obj
+  return Object.keys(obj).reduce((acc, curr) => {
+  //assign key to be curr and value to be array of obj.curr
+    acc[curr] = Object.keys(obj[curr]);
+  //return accumulator
+    return acc;
+  }, {})
+};
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 /* #halfOffSandwiches
  *
  * Takes in an 'array' and a 'number'. If the price of the item is greater than the 'number', return an object with the sandwich name as the key and the value as half the price of it's current price.
@@ -695,9 +705,25 @@ var allcafeItems;
  * @return {Object}
  * 
  */
+//////////////////////////////////////////////////////////////////////////////////////////////
 
-var halfOffSandwiches;
 
+function halfOffSandwiches(sandwiches, num){
+  //reduce sandwiches array
+  return Object.keys(sandwiches[0]).reduce((acc, curr) => {
+  //if the price of the sandwich is greater than num
+    if (sandwiches[0][curr].pricePerItem > num) {
+  //assign key value pair schema:      sandwichName:   price/2
+      acc[curr] = sandwiches[0][curr].pricePerItem / 2;
+      return acc;
+    } else {
+      return acc;
+    }
+  }, {});
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 /* #getNoMeatSandwiches
  *
  * Takes in an array and returns an object of only sandwiches with no meat as an ingredient. The key is the name of the sandwich and the value is the price of the sandwich ( eg: { sandwich1: $5 } ).
@@ -706,8 +732,12 @@ var halfOffSandwiches;
  * @return {Object}
  * 
  */
+////////////////////////////////////////////////////////////////////////////////////////
 
-var getNoMeatSandwiches;
+
+function getNoMeatSandwiches(){
+
+};
 
 /* #updateCoffeeInventory
  *
