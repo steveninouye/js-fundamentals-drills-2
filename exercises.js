@@ -310,8 +310,7 @@ function movieRatings(key, value){
 function sumOfAllStudents(obj){
   //NOTE: obj === schools.devLeague.tracks;
   //create an array of keys(tracks)
-  var tracks = Object.keys(obj);
-  return tracks.reduce((acc, curr) => {
+  return Object.keys(obj).reduce((acc, curr) => {
     acc += obj[curr][0].fullTime.currentStudents;
     acc += obj[curr][1].partTime.currentStudents;
     return acc;
@@ -843,8 +842,15 @@ function totalPopulation(obj){
 /////////////////////////////////////////////////////////////////////////////////////
 
 
-function placesLived(){
-
+function placesLived(obj){
+  //NOTE: obj == [id[#], id[#], id[#]]
+  //schema: obj[#].citiesLived[1 or 2][hometown/currentLocation].state = [key]
+  var cache = { hometown: {}, currentLocation: {} };
+  return obj.reduce((acc, curr) => {
+    acc.hometown[curr.username] = Object.keys(curr.citiesLived[0].hometown.state)[0];
+    acc.currentLocation[curr.username] = Object.keys(curr.citiesLived[1].currentLocation.state)[0];
+    return acc;
+  }, cache)
 };
 
 
@@ -860,8 +866,14 @@ function placesLived(){
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-function addSchool(){
-
+function addSchool(data, newSchool, tracks){
+  //NOTE: data === schools; newSchool === {jrDevLeagueAcademy: { tracks: {} } }
+  // tracks === [ { jsWebDev: { students: 5 }, unity3dGameDev: { students: 6 } } ]
+  data.devLeague.tracks = Object.keys(data.devLeague.tracks);
+  data[Object.keys(newSchool)[0]] = {
+    tracks: Object.keys(tracks[0])
+  }
+  return data;
 };
 
 
@@ -877,8 +889,14 @@ function addSchool(){
 //////////////////////////////////////////////////////////////////////
 
 
-function updateGitHubRank(){
-
+function updateGitHubRank(obj, num){
+  //NOTE: obj == languages; num === 5;
+  return Object.keys(obj).reduce((acc, curr) => {
+    if (obj[curr].gitHubRank === undefined) { var x = num 
+        }   else   {  var x = obj[curr].gitHubRank  }
+    acc.gitHubRank[curr] = x;
+    return acc;
+  }, { gitHubRank: { } } )
 };
 
 /* #top3rankedLang
@@ -892,8 +910,13 @@ function updateGitHubRank(){
 /////////////////////////////////////////////////////////////////////////////
 
 
-function top3rankedLang(){
-
+function top3rankedLang(obj){
+  return Object.keys(obj).reduce((acc, curr) => {
+    if (obj[curr].gitHubRank <= 3) {
+      acc.topRankingLanguages[curr] = obj[curr].gitHubRank;
+    }
+    return acc;
+  }, { topRankingLanguages: { } })
 };
 
 /* #removeIngredient
@@ -908,8 +931,15 @@ function top3rankedLang(){
 /////////////////////////////////////////////////////////////////////////////////
 
 
-function removeIngredient(){
-
+function removeIngredient(dataObj, removeIng){
+  return Object.keys(dataObj).reduce((acc, curr) => {
+    dataObj[curr].ingredients.bread.forEach(element => {
+      if(element !== removeIng && acc.availableBread.indexOf(element) === -1) {
+        acc.availableBread.push(element);
+      }
+    })
+    return acc;
+  }, { availableBread: [] } )
 };
 
 
@@ -925,8 +955,14 @@ function removeIngredient(){
 ///////////////////////////////////////////////////////////////////////////////////
 
 
-function getPrices(){
-
+function getPrices(obj){
+//  cafe: [ sandwiches , bakedGoods ]
+  return obj.reduce((acc, curr) => {
+    Object.keys(curr).forEach(element => {
+      curr[element].pricePerItem < 5 ? acc[element] = curr[element].pricePerItem : acc[element] = curr[element].pricePerItem / 2;
+    })
+    return acc;
+  }, { } );
 };
 
 
