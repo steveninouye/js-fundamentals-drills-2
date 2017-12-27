@@ -956,7 +956,6 @@ function removeIngredient(dataObj, removeIng){
 
 
 function getPrices(obj){
-//  cafe: [ sandwiches , bakedGoods ]
   return obj.reduce((acc, curr) => {
     Object.keys(curr).forEach(element => {
       curr[element].pricePerItem < 5 ? acc[element] = curr[element].pricePerItem : acc[element] = curr[element].pricePerItem / 2;
@@ -979,8 +978,11 @@ function getPrices(obj){
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
-function addName(){
-
+function addName(newObj, nameArray){
+  for(var i = 0; i < nameArray.length; i++){
+    newObj[Object.keys(newObj)[i]] = nameArray[i];
+  }
+  return newObj;
 };
 
 module.exports = {
